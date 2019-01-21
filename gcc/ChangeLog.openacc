@@ -1,6 +1,14 @@
 2019-01-31  Thomas Schwinge  <thomas@codesourcery.com>
 	    Gergö Barany  <gergo@codesourcery.com>
 
+	* Makefile.in: Add...
+	* omp-oacc-kernels.c: ... this new file for the kernels conversion pass.
+	* passes.def: Add pass_convert_oacc_kernels to pipeline.
+	* tree-pass.h (make_pass_convert_oacc_kernels): Add declaration.
+
+2019-01-31  Thomas Schwinge  <thomas@codesourcery.com>
+	    Gergö Barany  <gergo@codesourcery.com>
+
 	* gimple.h (enum gf_mask): Add new target kinds
 	GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_PARALLELIZED,
 	GF_OMP_TARGET_KIND_OACC_PARALLEL_KERNELS_GANG_SINGLE, and
