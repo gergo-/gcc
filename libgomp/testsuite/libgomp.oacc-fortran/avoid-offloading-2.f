@@ -9,6 +9,7 @@
       INTEGER :: D
       INTEGER, VOLATILE :: X
       LOGICAL :: Y
+      INTEGER :: I
 
 !     Override the compiler's "avoid offloading" decision.
 #if defined ACC_DEVICE_TYPE_nvidia
@@ -21,9 +22,12 @@
       CALL ACC_INIT (D)
 
 !$ACC DATA COPYOUT(X, Y)
-!$ACC KERNELS ! { dg-warning "OpenACC kernels construct will be executed sequentially; will by default avoid offloading to prevent data copy penalty" "" { target { openacc_nvidia_accel_selected && opt_levels_2_plus } } }
+!$ACC KERNELS ! { dg-warning "OpenACC kernels construct will be executed sequentially; will by default avoid offloading to prevent !data copy penalty" "" { target { openacc_nvidia_accel_selected && opt_levels_2_plus } } .+1 }
       X = 33
       Y = ACC_ON_DEVICE (ACC_DEVICE_HOST)
+      DO i = 1, 10
+        CONTINUE
+      END DO
 !$ACC END KERNELS
 !$ACC END DATA
 

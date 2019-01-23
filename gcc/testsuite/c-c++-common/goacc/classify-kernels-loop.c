@@ -1,8 +1,7 @@
 /* Check offloaded function's attributes and classification for OpenACC
-   'kernels'.  */
+   'kernels loop'.  */
 
 /* { dg-additional-options "-O2" }
-   { dg-additional-options "-fopt-info-optimized-omp" }
    { dg-additional-options "-fdump-tree-ompexp" }
    { dg-additional-options "-fdump-tree-parloops1-all" }
    { dg-additional-options "-fdump-tree-oaccdevlow" } */
@@ -15,7 +14,7 @@ extern unsigned int *__restrict c;
 
 void KERNELS ()
 {
-#pragma acc kernels copyin (a[0:N], b[0:N]) copyout (c[0:N]) /* { dg-message "note: assigned OpenACC gang loop parallelism" "TODO" { xfail *-*-* } } */
+#pragma acc kernels loop copyin (a[0:N], b[0:N]) copyout (c[0:N])
   for (unsigned int i = 0; i < N; i++)
     c[i] = a[i] + b[i];
 }

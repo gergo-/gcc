@@ -1,8 +1,7 @@
 /* Check offloaded function's attributes and classification for unparallelized
-   OpenACC 'kernels'.  */
+   OpenACC 'kernels loop auto'.  */
 
 /* { dg-additional-options "-O2" }
-   { dg-additional-options "-fopt-info-optimized-omp" }
    { dg-additional-options "-fdump-tree-ompexp" }
    { dg-additional-options "-fdump-tree-parloops1-all" }
    { dg-additional-options "-fdump-tree-oaccdevlow" } */
@@ -18,8 +17,8 @@ extern unsigned int f (unsigned int);
 
 void KERNELS ()
 {
-#pragma acc kernels copyin (a[0:N], b[0:N]) copyout (c[0:N])
-  for (unsigned int i = 0; i < N; i++) /* { dg-message "note: assigned OpenACC seq loop parallelism" } */
+#pragma acc kernels loop auto copyin (a[0:N], b[0:N]) copyout (c[0:N])
+  for (unsigned int i = 0; i < N; i++)
     /* An "extern"al mapping of loop iterations/array indices makes the loop
        unparallelizable.  */
     c[i] = a[f (i)] + b[f (i)];

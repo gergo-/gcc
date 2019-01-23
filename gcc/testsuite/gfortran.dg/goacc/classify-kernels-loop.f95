@@ -1,8 +1,7 @@
 ! Check offloaded function's attributes and classification for OpenACC
-! 'kernels'.
+! 'kernels loop'.
 
 ! { dg-additional-options "-O2" }
-! { dg-additional-options "-fopt-info-optimized-omp" }
 ! { dg-additional-options "-fdump-tree-ompexp" }
 ! { dg-additional-options "-fdump-tree-parloops1-all" }
 ! { dg-additional-options "-fdump-tree-oaccdevlow" }
@@ -15,11 +14,11 @@ program main
 
   call setup(a, b)
 
-  !$acc kernels copyin (a(0:n-1), b(0:n-1)) copyout (c(0:n-1))
-  do i = 0, n - 1 ! { dg-message "note: assigned OpenACC gang loop parallelism" }
+  !$acc kernels loop copyin (a(0:n-1), b(0:n-1)) copyout (c(0:n-1))
+  do i = 0, n - 1
      c(i) = a(i) + b(i)
   end do
-  !$acc end kernels
+  !$acc end kernels loop
 end program main
 
 ! Check the offloaded function's attributes.

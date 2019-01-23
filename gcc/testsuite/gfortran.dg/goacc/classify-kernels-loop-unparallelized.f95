@@ -1,8 +1,7 @@
 ! Check offloaded function's attributes and classification for unparallelized
-! OpenACC 'kernels'.
+! OpenACC 'kernels loop'.
 
 ! { dg-additional-options "-O2" }
-! { dg-additional-options "-fopt-info-optimized-omp" }
 ! { dg-additional-options "-fdump-tree-ompexp" }
 ! { dg-additional-options "-fdump-tree-parloops1-all" }
 ! { dg-additional-options "-fdump-tree-oaccdevlow" }
@@ -18,13 +17,13 @@ program main
 
   call setup(a, b)
 
-  !$acc kernels copyin (a(0:n-1), b(0:n-1)) copyout (c(0:n-1))
-  do i = 0, n - 1 ! { dg-message "note: assigned OpenACC seq loop parallelism" }
+  !$acc kernels loop copyin (a(0:n-1), b(0:n-1)) copyout (c(0:n-1))
+  do i = 0, n - 1
      ! An "external" mapping of loop iterations/array indices makes the loop
      ! unparallelizable.
      c(i) = a(f (i)) + b(f (i))
   end do
-  !$acc end kernels
+  !$acc end kernels loop
 end program main
 
 ! Check the offloaded function's attributes.

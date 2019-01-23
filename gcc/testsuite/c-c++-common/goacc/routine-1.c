@@ -93,7 +93,7 @@ int main ()
 {
 #pragma acc kernels num_gangs (32) num_workers (32) vector_length (32)
   {
-    gang ();
+    gang (); /* { dg-warning "region contains gang partitoned code but is not gang partitioned" "TODO" { xfail *-*-* } } */
     worker ();
     vector ();
     seq ();
