@@ -1,6 +1,17 @@
 2019-01-31  Thomas Schwinge  <thomas@codesourcery.com>
 	    Gergö Barany  <gergo@codesourcery.com>
 
+	* omp-oacc-kernels.c (make_gang_single_region): Check "region sequence
+	code", add debug diagnostic code.
+	(is_unconditional_oacc_for_loop): Remove stmt parameter and check.
+	(determine_region_sequence_code_walk_stmt_fn): New function.
+	(determine_region_sequence_code): New function with two overloads.
+	(decompose_kernels_region_body): Update for possibility of generating
+	kernels regions.
+
+2019-01-31  Thomas Schwinge  <thomas@codesourcery.com>
+	    Gergö Barany  <gergo@codesourcery.com>
+
 	* omp-oacc-kernels.c (add_async_clauses_and_wait): New function...
 	(decompose_kernels_region_body): ... called from here.
 
