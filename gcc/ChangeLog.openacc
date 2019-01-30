@@ -1,3 +1,7 @@
+2019-01-31  Thomas Schwinge  <thomas@codesourcery.com>
+
+	* flag-types.h (enum openacc_kernels): New type.
+
 2019-01-31  Julian Brown  <julian@codesourcery.com>
 
 	* gimplify.c (gimplify_scan_omp_clauses): Handle array sections on
